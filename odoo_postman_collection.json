@@ -1,0 +1,276 @@
+{
+  "info": {
+    "name": "Odoo JSON-RPC API",
+    "description": "Collection for testing Odoo JSON-RPC endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://demo.csit-ksa.com",
+      "type": "string"
+    },
+    {
+      "key": "database",
+      "value": "demo",
+      "type": "string"
+    },
+    {
+      "key": "username",
+      "value": "admin",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "123",
+      "type": "string"
+    },
+    {
+      "key": "uid",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Common",
+      "item": [
+        {
+          "name": "Get Version",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"common\",\n        \"method\": \"version\",\n        \"args\": []\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        },
+        {
+          "name": "Authenticate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"common\",\n        \"method\": \"authenticate\",\n        \"args\": [\"{{database}}\", \"{{username}}\", \"{{password}}\", {}]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partners",
+      "item": [
+        {
+          "name": "Get Partners",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"res.partner\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [\"name\", \"phone\", \"email\", \"id\"],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get Product Templates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"product.template\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        },
+        {
+          "name": "Get Product Variants",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"product.product\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Get Sales Orders",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"sale.order\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [\"name\", \"phone\", \"email\", \"id\"],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        },
+        {
+          "name": "Get Sales Order Lines",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"sale.order.line\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [\"name\", \"phone\", \"email\", \"id\"],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accounting",
+      "item": [
+        {
+          "name": "Get Invoices",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"account.move\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [\"name\", \"phone\", \"email\", \"id\"],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        },
+        {
+          "name": "Get Invoice Lines",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"account.move.line\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [\"name\", \"phone\", \"email\", \"id\"],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Get Stock Moves",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{database}}\",\n            {{uid}},\n            \"{{password}}\",\n            \"stock.move\",\n            \"search_read\",\n            [[[\"id\", \"in\", [1, 2, 3]]]],\n            {\n                \"fields\": [],\n                \"limit\": 10\n            }\n        ]\n    },\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jsonrpc",
+              "host": ["{{base_url}}"],
+              "path": ["jsonrpc"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
